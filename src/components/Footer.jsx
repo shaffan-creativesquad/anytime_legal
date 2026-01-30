@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import {
   Scale,
@@ -17,6 +16,13 @@ import './Footer.css'
 const Footer = () => {
   const currentYear = new Date().getFullYear()
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const services = [
     'Immigration Services',
     'Family Law',
@@ -27,10 +33,10 @@ const Footer = () => {
   ]
 
   const quickLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About Us' },
-    { path: '/services', label: 'Our Services' },
-    { path: '/contact', label: 'Contact' },
+    { id: 'home', label: 'Home' },
+    { id: 'about', label: 'About Us' },
+    { id: 'services', label: 'Our Services' },
+    { id: 'contact', label: 'Contact' },
   ]
 
   const socialLinks = [
@@ -54,10 +60,10 @@ const Footer = () => {
           >
             <h3>Ready to Get Started?</h3>
             <p>Schedule your free consultation today and let us help you navigate your legal journey.</p>
-            <Link to="/contact" className="btn btn-gold">
+            <button onClick={() => scrollToSection('contact')} className="btn btn-gold">
               Book Free Consultation
               <ArrowRight size={18} />
-            </Link>
+            </button>
           </motion.div>
         </div>
       </div>
@@ -68,7 +74,7 @@ const Footer = () => {
           <div className="footer-grid">
             {/* Company Info */}
             <div className="footer-section footer-about">
-              <Link to="/" className="footer-logo">
+              <button onClick={() => scrollToSection('home')} className="footer-logo">
                 <div className="footer-logo-icon">
                   <Scale size={24} />
                 </div>
@@ -76,7 +82,7 @@ const Footer = () => {
                   <span className="footer-logo-name">Visho Legal</span>
                   <span className="footer-logo-tagline">Paralegal Services</span>
                 </div>
-              </Link>
+              </button>
               <p className="footer-description">
                 Professional paralegal services dedicated to providing accessible,
                 reliable, and affordable legal support for individuals and businesses.
@@ -100,11 +106,11 @@ const Footer = () => {
               <h4 className="footer-title">Quick Links</h4>
               <ul className="footer-links">
                 {quickLinks.map((link) => (
-                  <li key={link.path}>
-                    <Link to={link.path} className="footer-link">
+                  <li key={link.id}>
+                    <button onClick={() => scrollToSection(link.id)} className="footer-link">
                       <ArrowRight size={14} />
                       {link.label}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -116,10 +122,10 @@ const Footer = () => {
               <ul className="footer-links">
                 {services.map((service) => (
                   <li key={service}>
-                    <Link to="/services" className="footer-link">
+                    <button onClick={() => scrollToSection('services')} className="footer-link">
                       <ArrowRight size={14} />
                       {service}
-                    </Link>
+                    </button>
                   </li>
                 ))}
               </ul>

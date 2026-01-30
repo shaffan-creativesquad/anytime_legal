@@ -1,24 +1,27 @@
-import { Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
-import ScrollToTop from './components/ScrollToTop'
-import Home from './pages/Home'
-import About from './pages/About'
-import Services from './pages/Services'
-import Contact from './pages/Contact'
+import Hero from './components/sections/Hero'
+import Features from './components/sections/Features'
+import Services from './components/sections/Services'
+import Stats from './components/sections/Stats'
+import About from './components/sections/About'
+import Testimonials from './components/sections/Testimonials'
+import FAQ from './components/sections/FAQ'
+import Contact from './components/sections/Contact'
 
 function App() {
   return (
     <div className="app">
-      <ScrollToTop />
       <Header />
       <main>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
+        <Hero />
+        <Features />
+        <Services />
+        <Stats />
+        <About />
+        <Testimonials />
+        <FAQ />
+        <Contact />
       </main>
       <Footer />
     </div>

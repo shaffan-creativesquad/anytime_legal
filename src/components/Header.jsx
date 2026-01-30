@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X, Phone, Mail, Scale } from 'lucide-react'
 import './Header.css'
@@ -7,19 +6,31 @@ import './Header.css'
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const location = useLocation()
+  const [activeSection, setActiveSection] = useState('home')
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+
+      // Update active section based on scroll position
+      const sections = ['home', 'services', 'about', 'contact']
+      const scrollPosition = window.scrollY + 100
+
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
+
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
-
-  useEffect(() => {
-    setIsMobileMenuOpen(false)
-  }, [location])
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -29,11 +40,19 @@ const Header = () => {
     }
   }, [isMobileMenuOpen])
 
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' })
+    }
+    setIsMobileMenuOpen(false)
+  }
+
   const navLinks = [
-    { path: '/', label: 'Home' },
-    { path: '/about', label: 'About' },
-    { path: '/services', label: 'Services' },
-    { path: '/contact', label: 'Contact' },
+    { id: 'home', label: 'Home' },
+    { id: 'services', label: 'Services' },
+    { id: 'about', label: 'About' },
+    { id: 'contact', label: 'Contact' },
   ]
 
   return (
@@ -58,7 +77,7 @@ const Header = () => {
       {/* Main Header */}
       <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
         <div className="container header-content">
-          <Link to="/" className="logo">
+          <button onClick={() => scrollToSection('home')} className="logo">
             <motion.div
               className="logo-icon"
               whileHover={{ rotate: 10 }}
@@ -70,29 +89,29 @@ const Header = () => {
               <span className="logo-name">Visho Legal</span>
               <span className="logo-tagline">Paralegal Services</span>
             </div>
-          </Link>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="nav-desktop">
             {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`nav-link ${location.pathname === link.path ? 'active' : ''}`}
+              <button
+                key={link.id}
+                onClick={() => scrollToSection(link.id)}
+                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
               >
                 {link.label}
-                {location.pathname === link.path && (
+                {activeSection === link.id && (
                   <motion.div
                     className="nav-underline"
                     layoutId="underline"
                     transition={{ duration: 0.3 }}
                   />
                 )}
-              </Link>
+              </button>
             ))}
-            <Link to="/contact" className="btn btn-primary nav-cta">
+            <button onClick={() => scrollToSection('contact')} className="btn btn-primary nav-cta">
               Free Consultation
-            </Link>
+            </button>
           </nav>
 
           {/* Mobile Menu Toggle */}
@@ -118,17 +137,17 @@ const Header = () => {
               <nav className="nav-mobile-content">
                 {navLinks.map((link, index) => (
                   <motion.div
-                    key={link.path}
+                    key={link.id}
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <Link
-                      to={link.path}
-                      className={`nav-mobile-link ${location.pathname === link.path ? 'active' : ''}`}
+                    <button
+                      onClick={() => scrollToSection(link.id)}
+                      className={`nav-mobile-link ${activeSection === link.id ? 'active' : ''}`}
                     >
                       {link.label}
-                    </Link>
+                    </button>
                   </motion.div>
                 ))}
                 <motion.div
@@ -136,9 +155,9 @@ const Header = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: navLinks.length * 0.1 }}
                 >
-                  <Link to="/contact" className="btn btn-primary nav-mobile-cta">
+                  <button onClick={() => scrollToSection('contact')} className="btn btn-primary nav-mobile-cta">
                     Free Consultation
-                  </Link>
+                  </button>
                 </motion.div>
               </nav>
             </motion.div>

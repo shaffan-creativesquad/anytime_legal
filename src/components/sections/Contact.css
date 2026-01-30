@@ -1,48 +1,8 @@
-/* ===== Contact Hero ===== */
-.contact-hero {
-  position: relative;
-  padding: 6rem 0 4rem;
-  text-align: center;
-  overflow: hidden;
+/* ===== Contact Section ===== */
+.contact-section {
+  background: var(--background-alt);
 }
 
-.contact-hero-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  z-index: -1;
-}
-
-.contact-hero-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.05) 1px, transparent 0);
-  background-size: 40px 40px;
-}
-
-.contact-hero-content {
-  max-width: 700px;
-  margin: 0 auto;
-  color: var(--white);
-}
-
-.contact-hero-content .section-subtitle {
-  color: var(--secondary);
-}
-
-.contact-hero-content h1 {
-  color: var(--white);
-  margin-bottom: 1.5rem;
-}
-
-.contact-hero-content p {
-  font-size: 1.125rem;
-  color: rgba(255, 255, 255, 0.85);
-  line-height: 1.8;
-}
-
-/* ===== Contact Grid ===== */
 .contact-grid {
   display: grid;
   grid-template-columns: 1.2fr 0.8fr;
@@ -70,8 +30,8 @@
   color: var(--secondary);
 }
 
-.contact-form-header h2 {
-  font-size: 1.5rem;
+.contact-form-header h3 {
+  font-size: 1.375rem;
   margin-bottom: 0.25rem;
 }
 
@@ -325,43 +285,6 @@
   color: var(--white);
 }
 
-/* ===== Map Section ===== */
-.map-section {
-  padding-bottom: var(--section-padding);
-}
-
-.map-wrapper {
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: 0 10px 40px var(--shadow);
-}
-
-.map-placeholder {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 350px;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-  text-align: center;
-  padding: 2rem;
-}
-
-.map-placeholder svg {
-  color: var(--primary);
-  margin-bottom: 1rem;
-}
-
-.map-placeholder h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-.map-placeholder p {
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
-}
-
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
   .contact-grid {
@@ -381,10 +304,6 @@
 }
 
 @media (max-width: 768px) {
-  .contact-hero {
-    padding: 4rem 0 3rem;
-  }
-
   .form-row {
     grid-template-columns: 1fr;
     gap: 0;
@@ -403,21 +322,9 @@
   .contact-info-wrapper {
     flex-direction: column;
   }
-
-  .map-placeholder {
-    min-height: 280px;
-  }
 }
 
 @media (max-width: 480px) {
-  .contact-hero {
-    padding: 3rem 0 2rem;
-  }
-
-  .contact-hero-content p {
-    font-size: 1rem;
-  }
-
   .contact-form-wrapper {
     padding: 1.25rem;
   }
@@ -433,14 +340,5 @@
   .contact-info-icon {
     width: 40px;
     height: 40px;
-  }
-
-  .map-placeholder {
-    min-height: 220px;
-    padding: 1.5rem;
-  }
-
-  .map-placeholder h3 {
-    font-size: 1.25rem;
   }
 }
