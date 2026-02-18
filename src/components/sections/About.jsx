@@ -21,38 +21,39 @@ const About = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span className="section-subtitle">About Visho Legal</span>
-            <h2>Dedicated to Providing Accessible Legal Support</h2>
+            <span className="section-subtitle">Who We Are</span>
+            <h2>Anytime Legal Services Professional Corporation</h2>
             <p>
-              With over 15 years of experience in the legal industry, Visho Legal
-              has been at the forefront of providing professional paralegal services
-              to individuals and businesses alike.
+              We are a dedicated legal firm proudly serving clients across Ontario. Our expertise
+              spans various areas of law, specializing in Landlord & Tenant Disputes, Small Claims
+              Court matters up to $50,000, Traffic Ticket Defence, and Public Notary services.
             </p>
             <p>
-              Our team of licensed paralegals is committed to delivering accurate,
-              timely, and affordable legal document preparation and support services.
-              We believe everyone deserves access to quality legal assistance.
+              Our firm embodies the community's spirit of resilience and integrity. We are passionate
+              about delivering justice and safeguarding the rights and interests of our clients.
+              Whether you need advice, representation, or clarity on legal matters, we're here to
+              guide you every step of the way.
             </p>
             <ul className="about-list">
               <li>
                 <CheckCircle size={20} />
-                <span>Licensed and Certified Paralegals</span>
+                <span>Licensed Paralegal Professionals</span>
               </li>
               <li>
                 <CheckCircle size={20} />
-                <span>Transparent and Affordable Pricing</span>
+                <span>Serving Across Ontario</span>
               </li>
               <li>
                 <CheckCircle size={20} />
-                <span>Personalized Client Service</span>
+                <span>Compassionate & Expert Guidance</span>
               </li>
               <li>
                 <CheckCircle size={20} />
-                <span>Quick Turnaround Times</span>
+                <span>Client-Centered Approach</span>
               </li>
             </ul>
             <button onClick={scrollToContact} className="btn btn-primary">
-              Learn More About Us
+              Contact Us Today
               <ArrowRight size={18} />
             </button>
           </motion.div>
@@ -69,8 +70,8 @@ const About = () => {
                 <div className="about-image-icon">
                   <Scale size={48} />
                 </div>
-                <h4>Expert Legal Support</h4>
-                <p>Professional assistance for all your legal documentation needs</p>
+                <h4>Your Trusted Partner in Justice</h4>
+                <p>Committed to protecting your rights with integrity, expertise, and compassion</p>
               </div>
               <div className="about-accent about-accent-1"></div>
               <div className="about-accent about-accent-2"></div>

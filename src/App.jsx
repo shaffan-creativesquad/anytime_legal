@@ -5,8 +5,6 @@ import Features from './components/sections/Features'
 import Services from './components/sections/Services'
 import Stats from './components/sections/Stats'
 import About from './components/sections/About'
-import Testimonials from './components/sections/Testimonials'
-import FAQ from './components/sections/FAQ'
 import Contact from './components/sections/Contact'
 
 function App() {
@@ -19,8 +17,6 @@ function App() {
         <Services />
         <Stats />
         <About />
-        <Testimonials />
-        <FAQ />
         <Contact />
       </main>
       <Footer />

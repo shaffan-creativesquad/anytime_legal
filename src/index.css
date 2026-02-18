@@ -1,15 +1,15 @@
 /* ===== CSS Variables ===== */
 :root {
-  /* Colors */
+  /* Colors - Navy Blue & Gold */
   --primary: #1a365d;
   --primary-light: #2c5282;
   --primary-dark: #0f2340;
-  --secondary: #c9a227;
-  --secondary-light: #d4b84a;
-  --accent: #718096;
-  --background: #fafafa;
-  --background-alt: #f7f7f7;
-  --text: #2d3748;
+  --secondary: #D4AF37;
+  --secondary-light: #E0C055;
+  --accent: #4a5568;
+  --background: #ffffff;
+  --background-alt: #f7fafc;
+  --text: #1a202c;
   --text-light: #4a5568;
   --text-muted: #718096;
   --white: #ffffff;

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Clock, Award, ThumbsUp } from 'lucide-react'
+import { Heart, FileSearch, DollarSign, Clock } from 'lucide-react'
 import './Features.css'
 
 const Features = () => {
@@ -19,25 +19,43 @@ const Features = () => {
 
   const features = [
     {
+      icon: Heart,
+      title: 'Personalized Attention',
+      description: 'Every client receives individualized care tailored to their unique circumstances with dedicated support at every step.',
+    },
+    {
+      icon: FileSearch,
+      title: 'Comprehensive Support',
+      description: 'Detailed case evaluations, strategic planning, and proactive communication to keep you informed and empowered.',
+    },
+    {
+      icon: DollarSign,
+      title: 'Transparent Pricing',
+      description: 'Competitive, transparent fees with no hidden costs—just fair pricing that delivers excellent value.',
+    },
+    {
       icon: Clock,
-      title: 'Fast Turnaround',
-      description: 'Quick processing times without compromising quality or accuracy.',
-    },
-    {
-      icon: Award,
-      title: 'Certified Professionals',
-      description: 'Licensed paralegals with extensive legal training and experience.',
-    },
-    {
-      icon: ThumbsUp,
-      title: 'Affordable Rates',
-      description: 'Competitive pricing that makes legal services accessible to everyone.',
+      title: 'Flexible Convenience',
+      description: 'Flexible appointment options to accommodate your schedule when you need legal assistance most.',
     },
   ]
 
   return (
     <section id="features" className="features section">
       <div className="container">
+        <motion.div
+          className="section-header"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+        >
+          <span className="section-subtitle">Why Choose Us</span>
+          <h2 className="section-title">What Sets Us Apart</h2>
+          <p className="section-description">
+            We combine professional expertise with personalized care—ensuring every client feels
+            supported, informed, and confident throughout their legal journey.
+          </p>
+        </motion.div>
         <motion.div
           className="features-grid"
           variants={staggerContainer}

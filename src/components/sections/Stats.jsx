@@ -17,10 +17,10 @@ const Stats = () => {
   }
 
   const stats = [
-    { number: '15+', label: 'Years Experience' },
-    { number: '5000+', label: 'Cases Handled' },
-    { number: '98%', label: 'Client Satisfaction' },
-    { number: '24/7', label: 'Support Available' },
+    { number: '1000+', label: 'Cases Handled' },
+    { number: '98%', label: 'Success Rate' },
+    { number: '4', label: 'Practice Areas' },
+    { number: 'Ontario', label: 'Province-Wide' },
   ]
 
   return (

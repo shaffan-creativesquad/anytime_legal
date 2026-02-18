@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import {
   Phone,
   Mail,
@@ -9,7 +9,8 @@ import {
   CheckCircle,
   AlertCircle,
   MessageSquare,
-  Calendar
+  Calendar,
+  ChevronDown
 } from 'lucide-react'
 import './Contact.css'
 
@@ -25,15 +26,29 @@ const Contact = () => {
   const [errors, setErrors] = useState({})
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState(null)
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+  const dropdownRef = useRef(null)
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [])
 
   const services = [
-    'Immigration Services',
-    'Family Law',
-    'Real Estate',
-    'Corporate Law',
-    'Notary Services',
-    'Court Filing',
-    'Document Preparation',
+    'Landlord & Tenant Disputes',
+    'Small Claims Court',
+    'Traffic Ticket Defence',
+    'Public Notary Services',
     'Other',
   ]
 
@@ -78,6 +93,14 @@ const Contact = () => {
     }
   }
 
+  const handleServiceSelect = (service) => {
+    setFormData(prev => ({ ...prev, service }))
+    setIsDropdownOpen(false)
+    if (errors.service) {
+      setErrors(prev => ({ ...prev, service: '' }))
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -85,19 +108,32 @@ const Contact = () => {
 
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500))
+    try {
+      const response = await fetch('https://formspree.io/f/xlgdodgb', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (response.ok) {
+        setSubmitStatus('success')
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          service: '',
+          message: '',
+        })
+      } else {
+        setSubmitStatus('error')
+      }
+    } catch {
+      setSubmitStatus('error')
+    }
 
     setIsSubmitting(false)
-    setSubmitStatus('success')
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      service: '',
-      message: '',
-    })
-
     setTimeout(() => setSubmitStatus(null), 5000)
   }
 
@@ -105,24 +141,29 @@ const Contact = () => {
     {
       icon: Phone,
       title: 'Phone',
-      content: '(123) 456-7890',
-      link: 'tel:+1234567890',
+      render: (
+        <p>
+          <a href="tel:+19054510300">(905) 451-0300</a>
+          {' / '}
+          <a href="tel:+12268889800">(226) 888-9800</a>
+        </p>
+      ),
     },
     {
       icon: Mail,
       title: 'Email',
-      content: 'info@visholegal.com',
-      link: 'mailto:info@visholegal.com',
+      content: 'visho@anytimelegalservices.ca',
+      link: 'mailto:visho@anytimelegalservices.ca',
     },
     {
       icon: MapPin,
-      title: 'Address',
-      content: '123 Legal Avenue, Suite 200\nCity, State 12345',
+      title: 'Location',
+      content: 'Serving Across Ontario',
     },
     {
       icon: Clock,
-      title: 'Business Hours',
-      content: 'Mon - Fri: 9:00 AM - 6:00 PM\nSat: 10:00 AM - 2:00 PM',
+      title: 'Availability',
+      content: 'Flexible Hours Available\nBy Appointment',
     },
   ]
 
@@ -137,8 +178,9 @@ const Contact = () => {
         >
           <span className="section-subtitle">Contact Us</span>
           <h2 className="section-title">Get in Touch</h2>
+          <div className="contact-badge">Free 30-Minute Consultation</div>
           <p className="section-description">
-            Ready to discuss your legal needs? Contact us today for a free consultation.
+            Ready to protect your rights? Contact Anytime Legal Services today for a free consultation.
           </p>
         </motion.div>
 
@@ -169,6 +211,20 @@ const Contact = () => {
                 <div>
                   <strong>Message Sent Successfully!</strong>
                   <p>Thank you for contacting us. We'll be in touch soon.</p>
+                </div>
+              </motion.div>
+            )}
+
+            {submitStatus === 'error' && (
+              <motion.div
+                className="form-error-message"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <AlertCircle size={24} />
+                <div>
+                  <strong>Something went wrong</strong>
+                  <p>Please try again or contact us directly by phone.</p>
                 </div>
               </motion.div>
             )}
@@ -229,7 +285,7 @@ const Contact = () => {
                     value={formData.phone}
                     onChange={handleChange}
                     className={`form-input ${errors.phone ? 'error' : ''}`}
-                    placeholder="(123) 456-7890"
+                    placeholder="(905) 451-0300"
                   />
                   {errors.phone && (
                     <span className="form-error">
@@ -239,21 +295,43 @@ const Contact = () => {
                   )}
                 </div>
                 <div className="form-group">
-                  <label htmlFor="service" className="form-label">
+                  <label className="form-label">
                     Service Needed <span className="required">*</span>
                   </label>
-                  <select
-                    id="service"
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className={`form-select ${errors.service ? 'error' : ''}`}
-                  >
-                    <option value="">Select a service</option>
-                    {services.map((service, index) => (
-                      <option key={index} value={service}>{service}</option>
-                    ))}
-                  </select>
+                  <div className="custom-dropdown" ref={dropdownRef}>
+                    <button
+                      type="button"
+                      className={`dropdown-trigger ${errors.service ? 'error' : ''} ${formData.service ? 'has-value' : ''}`}
+                      onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                      aria-expanded={isDropdownOpen}
+                    >
+                      <span>{formData.service || 'Select a service'}</span>
+                      <ChevronDown size={18} className={`dropdown-icon ${isDropdownOpen ? 'open' : ''}`} />
+                    </button>
+                    <AnimatePresence>
+                      {isDropdownOpen && (
+                        <motion.ul
+                          className="dropdown-menu"
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          {services.map((service, index) => (
+                            <li key={index}>
+                              <button
+                                type="button"
+                                className={`dropdown-item ${formData.service === service ? 'selected' : ''}`}
+                                onClick={() => handleServiceSelect(service)}
+                              >
+                                {service}
+                              </button>
+                            </li>
+                          ))}
+                        </motion.ul>
+                      )}
+                    </AnimatePresence>
+                  </div>
                   {errors.service && (
                     <span className="form-error">
                       <AlertCircle size={14} />
@@ -324,7 +402,7 @@ const Contact = () => {
                     </div>
                     <div className="contact-info-content">
                       <h4>{info.title}</h4>
-                      {info.link ? (
+                      {info.render ? info.render : info.link ? (
                         <a href={info.link}>{info.content}</a>
                       ) : (
                         <p>{info.content}</p>
@@ -340,11 +418,11 @@ const Contact = () => {
               <h3>Book a Free Consultation</h3>
               <p>
                 Schedule a no-obligation consultation to discuss your legal needs
-                with one of our experienced paralegals.
+                with our licensed paralegal team serving all of Ontario.
               </p>
-              <a href="tel:+1234567890" className="btn btn-primary">
+              <a href="tel:+19054510300" className="btn btn-primary">
                 <Phone size={18} />
-                Call (123) 456-7890
+                Call (905) 451-0300
               </a>
             </div>
           </motion.div>

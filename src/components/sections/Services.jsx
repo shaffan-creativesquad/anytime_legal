@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  Scale,
-  FileText,
-  Users,
   Home as HomeIcon,
-  Briefcase,
-  Shield
+  Gavel,
+  Car,
+  Stamp
 } from 'lucide-react'
 import './Services.css'
 
@@ -34,34 +32,24 @@ const Services = () => {
 
   const services = [
     {
-      icon: FileText,
-      title: 'Immigration Services',
-      description: 'Visa applications, work permits, citizenship, and immigration document preparation.',
-    },
-    {
-      icon: Users,
-      title: 'Family Law',
-      description: 'Divorce paperwork, child custody documents, adoption filings, and family court preparation.',
-    },
-    {
       icon: HomeIcon,
-      title: 'Real Estate',
-      description: 'Property transfers, lease agreements, title searches, and closing documentation.',
+      title: 'Landlord & Tenant Disputes',
+      description: 'Expert representation for evictions, rent disputes, lease violations, maintenance issues, and Landlord and Tenant Board hearings across Ontario.',
     },
     {
-      icon: Briefcase,
-      title: 'Corporate Law',
-      description: 'Business formation, contracts, corporate filings, and compliance documentation.',
+      icon: Gavel,
+      title: 'Small Claims Court',
+      description: 'Professional representation for civil matters up to $50,000. We handle debt collection, contract disputes, property damage claims, and more.',
     },
     {
-      icon: Shield,
-      title: 'Notary Services',
-      description: 'Document notarization, affidavits, sworn statements, and legal certifications.',
+      icon: Car,
+      title: 'Traffic Ticket Defence',
+      description: 'Fight your traffic tickets with experienced defence. Speeding, careless driving, HTA violations—we work to protect your driving record and reduce penalties.',
     },
     {
-      icon: Scale,
-      title: 'Court Filing',
-      description: 'Document filing, court form preparation, and procedural guidance assistance.',
+      icon: Stamp,
+      title: 'Public Notary Services',
+      description: 'Certified notary services for document authentication, affidavits, statutory declarations, certified copies, and legal certifications.',
     },
   ]
 
@@ -74,11 +62,11 @@ const Services = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <span className="section-subtitle">What We Offer</span>
-          <h2 className="section-title">Our Legal Services</h2>
+          <span className="section-subtitle">Our Practice Areas</span>
+          <h2 className="section-title">Legal Services We Offer</h2>
           <p className="section-description">
-            Comprehensive paralegal services tailored to meet your specific legal needs
-            with professionalism and care.
+            Our expertise spans various areas of law, providing comprehensive paralegal services
+            to individuals and businesses across Ontario.
           </p>
         </motion.div>
         <motion.div
@@ -101,7 +89,7 @@ const Services = () => {
               <h3>{service.title}</h3>
               <p>{service.description}</p>
               <button onClick={scrollToContact} className="service-link">
-                Learn More <ArrowRight size={16} />
+                Get Help Now <ArrowRight size={16} />
               </button>
             </motion.div>
           ))}
@@ -113,7 +101,7 @@ const Services = () => {
           viewport={{ once: true }}
         >
           <button onClick={scrollToContact} className="btn btn-primary">
-            Get Started Today
+            Schedule a Consultation
             <ArrowRight size={18} />
           </button>
         </motion.div>

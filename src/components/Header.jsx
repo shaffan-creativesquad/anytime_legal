@@ -1,7 +1,31 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, Phone, Mail, Scale } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import './Header.css'
+
+const InstagramIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+  </svg>
+)
+
+const FacebookIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+)
+
+const TikTokIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.76a4.85 4.85 0 0 1-1.01-.07z"/>
+  </svg>
+)
+
+const socialLinks = [
+  { icon: InstagramIcon, href: 'https://www.instagram.com/anytime.legal/', label: 'Instagram' },
+  { icon: FacebookIcon, href: 'https://www.facebook.com/profile.php?id=61573378811262', label: 'Facebook' },
+  { icon: TikTokIcon, href: 'https://www.tiktok.com/@anytime.legal', label: 'TikTok' },
+]
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -41,11 +65,15 @@ const Header = () => {
   }, [isMobileMenuOpen])
 
   const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
-    }
     setIsMobileMenuOpen(false)
+    document.body.style.overflow = 'unset'
+
+    setTimeout(() => {
+      const element = document.getElementById(sectionId)
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' })
+      }
+    }, 100)
   }
 
   const navLinks = [
@@ -57,39 +85,35 @@ const Header = () => {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="top-bar">
-        <div className="container top-bar-content">
-          <div className="top-bar-contact">
-            <a href="tel:+1234567890">
-              <Phone size={14} />
-              <span>(123) 456-7890</span>
-            </a>
-            <a href="mailto:info@visholegal.com">
-              <Mail size={14} />
-              <span>info@visholegal.com</span>
-            </a>
-          </div>
-          <p className="top-bar-tagline">Professional Legal Support You Can Trust</p>
-        </div>
-      </div>
-
       {/* Main Header */}
       <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
         <div className="container header-content">
-          <button onClick={() => scrollToSection('home')} className="logo">
-            <motion.div
-              className="logo-icon"
-              whileHover={{ rotate: 10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <Scale size={28} />
-            </motion.div>
-            <div className="logo-text">
-              <span className="logo-name">Visho Legal</span>
-              <span className="logo-tagline">Paralegal Services</span>
+          <div className="header-left">
+            <div className="nav-social-links">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="nav-social-link"
+                >
+                  <social.icon />
+                </a>
+              ))}
             </div>
-          </button>
+            <button onClick={() => scrollToSection('home')} className="logo">
+              <motion.img
+                src="/images/logo2.0.jpeg"
+                alt="Visho Legal"
+                className="logo-image"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.3 }}
+              />
+              <span className="logo-name">Anytime Legal Services</span>
+            </button>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="nav-desktop">

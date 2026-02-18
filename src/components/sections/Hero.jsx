@@ -2,9 +2,9 @@ import { motion } from 'framer-motion'
 import {
   ArrowRight,
   Scale,
-  FileText,
-  Users,
-  Shield,
+  Gavel,
+  Home,
+  Car,
   CheckCircle,
   ChevronDown
 } from 'lucide-react'
@@ -31,15 +31,14 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <span className="hero-badge">Trusted Paralegal Services</span>
           <h1 className="hero-title">
-            Professional Legal Support
-            <span className="hero-title-accent"> You Can Rely On</span>
+            Protecting Your Legal Rights
+            <span className="hero-title-accent"> With Expertise & Compassion</span>
           </h1>
           <p className="hero-description">
-            We provide expert paralegal services to help individuals and businesses
-            navigate complex legal processes with confidence. From document preparation
-            to court filings, we are here to support your legal journey.
+            When legal issues arise, choosing a knowledgeable and reliable paralegal firm is essential.
+            We provide trusted, client-focused paralegal services across Ontario designed to protect
+            your legal rights with professionalism and care.
           </p>
           <div className="hero-buttons">
             <button onClick={() => scrollToSection('contact')} className="btn btn-gold">
@@ -53,15 +52,15 @@ const Hero = () => {
           <div className="hero-trust">
             <div className="hero-trust-item">
               <CheckCircle size={18} />
-              <span>Licensed & Insured</span>
+              <span>Licensed Paralegal</span>
             </div>
             <div className="hero-trust-item">
               <CheckCircle size={18} />
-              <span>15+ Years Experience</span>
+              <span>Serving Across Ontario</span>
             </div>
             <div className="hero-trust-item">
               <CheckCircle size={18} />
-              <span>5000+ Cases Handled</span>
+              <span>Flexible Appointments</span>
             </div>
           </div>
         </motion.div>
@@ -73,20 +72,20 @@ const Hero = () => {
         >
           <div className="hero-card hero-card-main">
             <Scale size={48} />
-            <h3>Justice & Integrity</h3>
-            <p>Serving clients with dedication and professionalism since 2009</p>
+            <h3>Your Partner in Justice</h3>
+            <p>Trusted legal support anytime, anywhere across Ontario</p>
           </div>
           <div className="hero-card hero-card-floating hero-card-1">
-            <FileText size={24} />
-            <span>Document Prep</span>
+            <Gavel size={24} />
+            <span>Small Claims</span>
           </div>
           <div className="hero-card hero-card-floating hero-card-2">
-            <Users size={24} />
-            <span>Family Law</span>
+            <Home size={24} />
+            <span>Landlord & Tenant</span>
           </div>
           <div className="hero-card hero-card-floating hero-card-3">
-            <Shield size={24} />
-            <span>Notary Services</span>
+            <Car size={24} />
+            <span>Traffic Defence</span>
           </div>
         </motion.div>
       </div>
