@@ -8,6 +8,7 @@ import Stats from './components/sections/Stats'
 import About from './components/sections/About'
 import Contact from './components/sections/Contact'
 import TermsAndConditions from './components/sections/TermsAndConditions'
+import PrivacyPolicy from './components/sections/PrivacyPolicy'
 
 const HomePage = () => (
   <main>
@@ -28,6 +29,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/terms" element={<TermsAndConditions />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
         </Routes>
         <Footer />
       </div>

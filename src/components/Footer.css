@@ -314,13 +314,23 @@
   margin: 0;
 }
 
+.footer-legal-links {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-legal-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 0.75rem;
+}
+
 .footer-terms-link {
   font-size: 0.8125rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
   transition: color var(--transition-fast);
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  text-decoration: none;
 }
 
 .footer-terms-link:hover {

@@ -1,448 +1,329 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import {
-  Scale,
-  Shield,
-  Clock,
-  Phone,
-  Mail,
-  ChevronRight,
-  ArrowLeft,
-  FileText,
-  AlertCircle,
-  CheckCircle,
-  Users,
-  Briefcase,
-  Lock,
+  Scale, Shield, Clock, Phone, Mail,
+  ChevronDown, ArrowLeft, FileText,
+  AlertCircle, CheckCircle, Users, Briefcase, Lock,
 } from 'lucide-react'
-import './TermsAndConditions.css'
+import './LegalPage.css'
 
 const sections = [
-  { id: 'who-we-are', label: 'Who We Are', icon: Users },
-  { id: 'our-services', label: 'Our Services', icon: Briefcase },
-  { id: 'website-info', label: 'Website Information', icon: FileText },
-  { id: 'no-relationship', label: 'No Paralegal-Client Relationship', icon: AlertCircle },
-  { id: 'what-we-help', label: 'What We Can Help With', icon: CheckCircle },
-  { id: 'deadlines', label: 'Deadlines Matter', icon: Clock },
-  { id: 'notary', label: 'Notary & Commissioning', icon: Scale },
-  { id: 'fees', label: 'Fees and Payment', icon: FileText },
-  { id: 'responsibilities', label: 'Your Responsibilities', icon: Users },
-  { id: 'no-guarantee', label: 'No Guarantee of Outcome', icon: AlertCircle },
-  { id: 'confidentiality', label: 'Confidentiality & Privacy', icon: Lock },
-  { id: 'ending-services', label: 'Ending Our Services', icon: FileText },
-  { id: 'professional-standards', label: 'Professional Standards', icon: Shield },
-  { id: 'limitation', label: 'Limitation of Liability', icon: Scale },
-  { id: 'governing-law', label: 'Governing Law', icon: FileText },
-  { id: 'changes', label: 'Changes', icon: FileText },
-  { id: 'contact', label: 'Contact Us', icon: Phone },
+  { id: 'who-we-are',      label: 'Who We Are',                    icon: Users },
+  { id: 'our-services',    label: 'Our Services',                   icon: Briefcase },
+  { id: 'website-info',    label: 'Website Information',            icon: FileText },
+  { id: 'no-relationship', label: 'No Client Relationship',         icon: AlertCircle },
+  { id: 'what-we-help',    label: 'What We Can Help With',          icon: CheckCircle },
+  { id: 'deadlines',       label: 'Deadlines Matter',               icon: Clock },
+  { id: 'notary',          label: 'Notary & Commissioning',         icon: Scale },
+  { id: 'fees',            label: 'Fees and Payment',               icon: FileText },
+  { id: 'responsibilities','label': 'Your Responsibilities',        icon: Users },
+  { id: 'no-guarantee',    label: 'No Guarantee of Outcome',        icon: AlertCircle },
+  { id: 'confidentiality', label: 'Confidentiality & Privacy',      icon: Lock },
+  { id: 'ending-services', label: 'Ending Our Services',            icon: FileText },
+  { id: 'professional',    label: 'Professional Standards',         icon: Shield },
+  { id: 'limitation',      label: 'Limitation of Liability',        icon: Scale },
+  { id: 'governing-law',   label: 'Governing Law',                  icon: FileText },
+  { id: 'changes',         label: 'Changes',                        icon: FileText },
+  { id: 'contact',         label: 'Contact Us',                     icon: Phone },
 ]
 
-const TermsAndConditions = () => {
-  const [activeSection, setActiveSection] = useState('who-we-are')
-  const [isTocOpen, setIsTocOpen] = useState(false)
+export default function TermsAndConditions() {
+  const [active, setActive]   = useState(sections[0].id)
+  const [progress, setProgress] = useState(0)
+  const [tocOpen, setTocOpen] = useState(false)
+
+  useEffect(() => { window.scrollTo(0, 0) }, [])
 
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    const onScroll = () => {
+      const doc  = document.documentElement
+      const pct  = (window.scrollY / (doc.scrollHeight - doc.clientHeight)) * 100
+      setProgress(Math.min(pct, 100))
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPos = window.scrollY + 120
-      for (const section of sections) {
-        const el = document.getElementById(section.id)
-        if (el) {
-          const { offsetTop, offsetHeight } = el
-          if (scrollPos >= offsetTop && scrollPos < offsetTop + offsetHeight) {
-            setActiveSection(section.id)
-            break
-          }
+      const pos = window.scrollY + 130
+      for (const s of sections) {
+        const el = document.getElementById(s.id)
+        if (el && pos >= el.offsetTop && pos < el.offsetTop + el.offsetHeight) {
+          setActive(s.id)
+          break
         }
       }
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const scrollToSection = (id) => {
+  const jump = (id) => {
     const el = document.getElementById(id)
-    if (el) {
-      const offset = el.offsetTop - 100
-      window.scrollTo({ top: offset, behavior: 'smooth' })
-    }
-    setIsTocOpen(false)
+    if (el) window.scrollTo({ top: el.offsetTop - 90, behavior: 'smooth' })
+    setTocOpen(false)
   }
 
   return (
-    <div className="terms-page">
-      {/* Hero Banner */}
-      <section className="terms-hero">
-        <div className="terms-hero-overlay" />
+    <div className="legal-page">
+      <div className="legal-progress-bar" style={{ width: `${progress}%` }} />
+
+      {/* Hero */}
+      <section className="legal-hero">
+        <div className="legal-hero-grid" />
+        <div className="legal-hero-glow" />
         <div className="container">
-          <motion.div
-            className="terms-hero-content"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Link to="/" className="terms-back-link">
-              <ArrowLeft size={18} />
-              Back to Home
-            </Link>
-            <h1 className="terms-hero-title">
-              Terms &amp; <span className="terms-hero-accent">Conditions</span>
-            </h1>
-            <p className="terms-hero-subtitle">
-              Anytime Legal Services Professional Corporation
-            </p>
-            <div className="terms-hero-meta">
-              <span className="terms-meta-item">
-                <Clock size={15} />
-                Last updated: September 21, 2026
-              </span>
-              <span className="terms-meta-divider" />
-              <span className="terms-meta-item">
-                <Shield size={15} />
-                Law Society of Ontario Licensed
-              </span>
+          <Link to="/" className="legal-back-link">
+            <ArrowLeft size={15} /> Back to Home
+          </Link>
+          <div className="legal-hero-inner">
+            <div>
+              <p className="legal-hero-eyebrow">Anytime Legal Services</p>
+              <motion.h1
+                className="legal-hero-title"
+                initial={{ opacity: 0, y: 24 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                Terms &amp;<span>Conditions</span>
+              </motion.h1>
+              <div className="legal-hero-meta">
+                <span className="legal-meta-pill"><Clock size={14} /> Last updated: September 21, 2026</span>
+                <span className="legal-meta-pill"><Shield size={14} /> Law Society of Ontario Licensed</span>
+              </div>
             </div>
-          </motion.div>
+            <div className="legal-hero-icon-wrap">
+              <Scale size={72} strokeWidth={1} />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Intro Banner */}
-      <div className="terms-intro-banner">
+      {/* Intro */}
+      <div className="legal-intro-strip">
         <div className="container">
-          <div className="terms-intro-inner">
-            <AlertCircle size={20} className="terms-intro-icon" />
-            <p>
-              These terms explain how you can use the Anytime Legal Services website and what to expect
-              when you contact us before hiring our services. By using our website or getting in touch
-              with us, you agree to these terms. Once you hire us, we will set out the details of our
-              services in a written retainer agreement. If there is any conflict between these terms and
-              the signed agreement, the signed agreement will take priority.
-            </p>
-          </div>
+          <p className="legal-intro-text">
+            These terms explain how you can use the Anytime Legal Services website and what to expect
+            when you contact us before hiring our services. By using our website or getting in touch
+            with us, you agree to these terms. Once you hire us, the details will be set out in a
+            written retainer agreement.{' '}
+            <strong>If there is any conflict between these terms and the signed agreement, the signed agreement takes priority.</strong>
+          </p>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="terms-body">
-        <div className="container">
-          <div className="terms-layout">
-
-            {/* Sidebar TOC */}
-            <aside className="terms-sidebar">
-              <div className="terms-toc-card">
-                <h3 className="terms-toc-title">
-                  <FileText size={16} />
-                  Table of Contents
-                </h3>
-                <nav className="terms-toc-nav">
-                  {sections.map((s) => (
-                    <button
-                      key={s.id}
-                      onClick={() => scrollToSection(s.id)}
-                      className={`terms-toc-item ${activeSection === s.id ? 'active' : ''}`}
-                    >
-                      <ChevronRight size={13} className="terms-toc-arrow" />
-                      {s.label}
-                    </button>
-                  ))}
-                </nav>
-              </div>
-            </aside>
-
-            {/* Mobile TOC Toggle */}
-            <div className="terms-mobile-toc">
-              <button
-                className="terms-mobile-toc-toggle"
-                onClick={() => setIsTocOpen(!isTocOpen)}
-              >
-                <FileText size={16} />
-                Table of Contents
-                <ChevronRight
-                  size={16}
-                  className={`terms-mobile-toc-chevron ${isTocOpen ? 'open' : ''}`}
-                />
+      {/* Mobile TOC */}
+      <div className="legal-mobile-toc">
+        <button className="legal-mobile-toc-toggle" onClick={() => setTocOpen(!tocOpen)}>
+          <FileText size={15} /> Jump to Section
+          <ChevronDown size={16} className={`legal-mobile-chevron ${tocOpen ? 'open' : ''}`} />
+        </button>
+        {tocOpen && (
+          <div className="legal-mobile-toc-drawer">
+            {sections.map(s => (
+              <button key={s.id} onClick={() => jump(s.id)}
+                className={`legal-mobile-nav-btn ${active === s.id ? 'active' : ''}`}>
+                <s.icon size={13} /> {s.label}
               </button>
-              {isTocOpen && (
-                <div className="terms-mobile-toc-menu">
-                  {sections.map((s) => (
-                    <button
-                      key={s.id}
-                      onClick={() => scrollToSection(s.id)}
-                      className={`terms-toc-item ${activeSection === s.id ? 'active' : ''}`}
-                    >
-                      <ChevronRight size={13} className="terms-toc-arrow" />
-                      {s.label}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Body */}
+      <div className="legal-body">
+        <div className="container">
+          <div className="legal-body-inner">
+
+            {/* Sidebar Nav */}
+            <nav className="legal-nav">
+              <p className="legal-nav-label">Sections</p>
+              <div className="legal-nav-list">
+                {sections.map(s => (
+                  <button key={s.id} onClick={() => jump(s.id)}
+                    className={`legal-nav-btn ${active === s.id ? 'active' : ''}`}>
+                    <span className="legal-nav-dot" /> {s.label}
+                  </button>
+                ))}
+              </div>
+            </nav>
 
             {/* Content */}
-            <main className="terms-content">
+            <main className="legal-content">
 
-              <TermsSection id="who-we-are" icon={Users} title="Who We Are">
+              <Sec id="who-we-are" num="01" icon={Users} title="Who We Are" index={0}>
                 <p>
-                  Anytime Legal Services Professional Corporation is a licensed paralegal firm serving
-                  clients across Ontario. Our paralegals are licensed and regulated by the Law Society
-                  of Ontario and follow its Paralegal Rules of Conduct.
+                  Anytime Legal Services Professional Corporation is a licensed paralegal firm
+                  serving clients across Ontario. Our paralegals are licensed and regulated by the
+                  Law Society of Ontario and follow its Paralegal Rules of Conduct.
                 </p>
                 <p>
                   In these terms, <strong>"we," "us,"</strong> and <strong>"our"</strong> refer to
-                  Anytime Legal Services Professional Corporation. <strong>"You"</strong> refers to
-                  the person or business contacting us or using our services.
+                  Anytime Legal Services Professional Corporation.{' '}
+                  <strong>"You"</strong> refers to the person or business contacting us or using our services.
                 </p>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="our-services" icon={Briefcase} title="Our Services">
+              <Sec id="our-services" num="02" icon={Briefcase} title="Our Services" index={1}>
                 <p>We provide the following legal services:</p>
-                <ul className="terms-list">
-                  <li>Notary and commissioning services, including commissioning oaths, notarizing documents, affidavits, statutory declarations, certified copies, invitation letters, passport application support, consent to travel letters, and documents for the Indian Consulate</li>
-                  <li>Landlord and Tenant Board affidavits and representation</li>
-                  <li>Traffic ticket defence, including speeding, careless driving, CVOR matters, and demerit points</li>
-                  <li>Small Claims Court matters, including breach of contract, employment disputes, unpaid debts, negligence, property damage, and faulty goods or services</li>
+                <ul className="legal-list">
+                  {[
+                    'Notary and commissioning services — oaths, affidavits, statutory declarations, certified copies, invitation letters, passport support, consent to travel letters, and Indian Consulate documents',
+                    'Landlord and Tenant Board affidavits and representation',
+                    'Traffic ticket defence — speeding, careless driving, CVOR matters, and demerit points',
+                    'Small Claims Court — breach of contract, employment disputes, unpaid debts, negligence, property damage, and faulty goods or services',
+                  ].map((item, i) => (
+                    <li key={i}><span className="legal-list-bullet" />{item}</li>
+                  ))}
                 </ul>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="website-info" icon={FileText} title="Website Information Is Not Legal Advice">
-                <div className="terms-highlight-box">
+              <Sec id="website-info" num="03" icon={FileText} title="Website Information Is Not Legal Advice" index={2}>
+                <div className="legal-callout legal-callout-blue">
                   <AlertCircle size={18} />
-                  <p>
-                    The information on our website is provided for general and educational purposes only.
-                    It is <strong>not legal advice</strong> and should not be treated as a substitute
-                    for advice about your particular situation.
-                  </p>
+                  <p>The information on our website is for general and educational purposes only. It is <strong>not legal advice</strong> and should not replace advice about your specific situation.</p>
                 </div>
                 <p>
-                  Laws can change, and no two cases are exactly alike, so please speak with another
-                  licensed legal professional or us before taking action based on information found
-                  on our website.
+                  Laws can change and no two cases are exactly alike — please speak with a licensed
+                  legal professional or us before acting on information found on our website.
                 </p>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="no-relationship" icon={AlertCircle} title="No Paralegal-Client Relationship Until You Hire Us">
+              <Sec id="no-relationship" num="04" icon={AlertCircle} title="No Paralegal-Client Relationship Until You Hire Us" index={3}>
                 <p>
-                  Getting in touch with us through our website, by phone, or by email does{' '}
-                  <strong>not automatically create a paralegal-client relationship.</strong> That
-                  relationship begins once we've:
+                  Getting in touch through our website, phone, or email does{' '}
+                  <strong>not automatically create a paralegal-client relationship.</strong>{' '}
+                  That relationship begins once we have:
                 </p>
-                <ul className="terms-checklist">
-                  <li><CheckCircle size={16} /> Confirmed that we can act for you</li>
-                  <li><CheckCircle size={16} /> Completed our conflict check</li>
-                  <li><CheckCircle size={16} /> Had you sign a retainer agreement</li>
+                <ul className="legal-checklist">
+                  <li><CheckCircle size={15} /> Confirmed we can act for you</li>
+                  <li><CheckCircle size={15} /> Completed our conflict check</li>
+                  <li><CheckCircle size={15} /> Had you sign a retainer agreement</li>
                 </ul>
                 <p>
-                  We keep information you share with us about a potential matter confidential.
-                  However, until we have formally agreed to act for you, we cannot provide legal
-                  advice or take responsibility for protecting any deadlines that may apply to
-                  your matter.
+                  We keep information you share confidential. However, until we have formally
+                  agreed to act for you, we cannot provide legal advice or protect any deadlines
+                  that may apply to your matter.
                 </p>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="what-we-help" icon={CheckCircle} title="What We Can and Can't Help With">
-                <p>
-                  Paralegals in Ontario are licensed to provide legal services in specific areas.
-                  Some matters fall outside the services we're licensed to provide, including:
-                </p>
-                <ul className="terms-list terms-list-cross">
-                  <li>Most family law matters</li>
-                  <li>Wills and estates</li>
-                  <li>Real estate transactions</li>
-                  <li>Serious criminal charges</li>
+              <Sec id="what-we-help" num="05" icon={CheckCircle} title="What We Can and Can't Help With" index={4}>
+                <p>Some matters fall outside the services paralegals in Ontario are licensed to provide, including:</p>
+                <ul className="legal-list">
+                  {['Most family law matters','Wills and estates','Real estate transactions','Serious criminal charges'].map((item, i) => (
+                    <li key={i}><span className="legal-list-bullet" />{item}</li>
+                  ))}
                 </ul>
-                <p>
-                  If we can't assist with your matter, we'll let you know and may suggest that
-                  you speak with a lawyer or another appropriate professional.
-                </p>
-              </TermsSection>
+                <p>If we can't assist, we'll let you know and may suggest you speak with a lawyer or another appropriate professional.</p>
+              </Sec>
 
-              <TermsSection id="deadlines" icon={Clock} title="Deadlines Matter">
-                <div className="terms-highlight-box terms-highlight-warning">
+              <Sec id="deadlines" num="06" icon={Clock} title="Deadlines Matter" index={5}>
+                <div className="legal-callout legal-callout-gold">
                   <Clock size={18} />
-                  <p>
-                    Many legal matters have strict deadlines, and missing one can affect your options.
-                    Please contact us as early as possible if you need help.
-                  </p>
+                  <p>Many legal matters have strict deadlines — missing one can affect your options. Please contact us as early as possible.</p>
                 </div>
-                <p>For example:</p>
-                <ul className="terms-list">
-                  <li>You usually have <strong>15 days</strong> to answer a traffic ticket</li>
-                  <li>Claims and Landlord and Tenant Board applications have their own deadlines</li>
+                <ul className="legal-list">
+                  <li><span className="legal-list-bullet" />You usually have <strong>15 days</strong> to answer a traffic ticket</li>
+                  <li><span className="legal-list-bullet" />Claims and Landlord and Tenant Board applications have their own deadlines</li>
                 </ul>
-                <p>
-                  Until we have formally agreed to act for you, you remain responsible for keeping
-                  track of and meeting any deadlines that apply to your matter.
-                </p>
-              </TermsSection>
+                <p>Until we have formally agreed to act for you, you remain responsible for keeping track of any deadlines.</p>
+              </Sec>
 
-              <TermsSection id="notary" icon={Scale} title="Notary and Commissioning Services">
-                <p>
-                  For most notary and commissioning appointments, please bring valid
-                  government-issued photo ID. If a document needs to be signed in front of us,
-                  please <strong>do not sign it beforehand.</strong>
-                </p>
-                <p>
-                  We verify identities and witness signatures as required. Unless we've been hired
-                  to provide legal advice, we do not advise you about the contents of documents
-                  you ask us to commission or notarize.
-                </p>
-                <div className="terms-info-box">
-                  <p>
-                    Some documents, including documents intended for consulates, airlines, or
-                    government offices, may have specific requirements. We cannot guarantee that
-                    a third party will accept a document after it has been notarized or
-                    commissioned. For certified copies, please bring the original document.
-                  </p>
+              <Sec id="notary" num="07" icon={Scale} title="Notary and Commissioning Services" index={6}>
+                <p>For most notary and commissioning appointments, please bring valid government-issued photo ID. If a document needs to be signed in front of us, please <strong>do not sign it beforehand.</strong></p>
+                <div className="legal-note">
+                  <p>Some documents for consulates, airlines, or government offices may have specific requirements. We cannot guarantee a third party will accept a document after notarization. For certified copies, bring the original document.</p>
                 </div>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="fees" icon={FileText} title="Fees and Payment">
-                <p>
-                  Our fees will be explained in a written retainer or fee agreement before we
-                  begin work. Some of our services are also available at a flat fee.
-                </p>
-                <ul className="terms-list">
-                  <li>We hold any funds you pay in advance <strong>in trust</strong> until they are earned, as required by the Law Society</li>
-                  <li>Costs such as court filing fees, service fees, and other disbursements are separate from our fees and are your responsibility</li>
-                  <li>Applicable taxes will also be added</li>
-                  <li>Payment is due according to the terms set out in your agreement</li>
+              <Sec id="fees" num="08" icon={FileText} title="Fees and Payment" index={7}>
+                <p>Our fees will be explained in a written retainer or fee agreement before we begin work. Some services are available at a flat fee.</p>
+                <ul className="legal-list">
+                  <li><span className="legal-list-bullet" />Advance funds are held <strong>in trust</strong> until earned, as required by the Law Society</li>
+                  <li><span className="legal-list-bullet" />Court filing fees, service fees, and other disbursements are your responsibility</li>
+                  <li><span className="legal-list-bullet" />Applicable taxes will be added</li>
+                  <li><span className="legal-list-bullet" />Payment is due per the terms in your agreement</li>
                 </ul>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="responsibilities" icon={Users} title="Your Responsibilities">
+              <Sec id="responsibilities" num="09" icon={Users} title="Your Responsibilities" index={8}>
                 <p>To help us serve you effectively, please:</p>
-                <ul className="terms-checklist">
-                  <li><CheckCircle size={16} /> Make sure the information you provide is accurate and complete</li>
-                  <li><CheckCircle size={16} /> Send us the documents when we request them</li>
-                  <li><CheckCircle size={16} /> Respond to our messages within a reasonable time frame</li>
-                  <li><CheckCircle size={16} /> Attend any hearings or meetings that are required of you</li>
-                  <li><CheckCircle size={16} /> Let us know if there is any change to your contact details</li>
+                <ul className="legal-checklist">
+                  <li><CheckCircle size={15} /> Provide accurate and complete information</li>
+                  <li><CheckCircle size={15} /> Send documents when requested</li>
+                  <li><CheckCircle size={15} /> Respond to messages within a reasonable timeframe</li>
+                  <li><CheckCircle size={15} /> Attend any required hearings or meetings</li>
+                  <li><CheckCircle size={15} /> Notify us of any changes to your contact details</li>
                 </ul>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="no-guarantee" icon={AlertCircle} title="No Guarantee of Outcome">
-                <p>
-                  We will put substantial effort into your case, but we cannot guarantee any
-                  particular result. The outcome depends on:
-                </p>
-                <ul className="terms-list">
-                  <li>The facts and evidence of your case</li>
-                  <li>The applicable law</li>
-                  <li>The decisions of the courts, tribunals, and other relevant bodies</li>
+              <Sec id="no-guarantee" num="10" icon={AlertCircle} title="No Guarantee of Outcome" index={9}>
+                <p>We will put substantial effort into your case, but we cannot guarantee any particular result. The outcome depends on:</p>
+                <ul className="legal-list">
+                  <li><span className="legal-list-bullet" />The facts and evidence of your case</li>
+                  <li><span className="legal-list-bullet" />The applicable law</li>
+                  <li><span className="legal-list-bullet" />Decisions made by courts, tribunals, and other relevant bodies</li>
                 </ul>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="confidentiality" icon={Lock} title="Confidentiality and Privacy">
-                <p>
-                  The information which you give us is confidential and is covered by the
-                  privilege between paralegals and their clients, with the exception of those
-                  rare instances in which the law or our professional obligations require it.
-                </p>
-                <p>
-                  Your personal information is dealt with in accordance with our Privacy Policy.
-                </p>
-              </TermsSection>
+              <Sec id="confidentiality" num="11" icon={Lock} title="Confidentiality and Privacy" index={10}>
+                <p>The information you give us is confidential and covered by paralegal-client privilege, except in rare instances where the law or our professional obligations require otherwise.</p>
+                <p>Your personal information is handled in accordance with our Privacy Policy.</p>
+              </Sec>
 
-              <TermsSection id="ending-services" icon={FileText} title="Ending Our Services">
-                <p>
-                  You can choose to end our services at any time. We may also withdraw from
-                  representing you in the limited circumstances permitted by the Paralegal
-                  Rules of Conduct.
-                </p>
-                <p>
-                  Where required, we'll provide reasonable notice so you have an opportunity
-                  to protect your interests. You remain responsible for fees and costs for
-                  work completed before our services end.
-                </p>
-              </TermsSection>
+              <Sec id="ending-services" num="12" icon={FileText} title="Ending Our Services" index={11}>
+                <p>You can end our services at any time. We may also withdraw from representing you in limited circumstances permitted by the Paralegal Rules of Conduct.</p>
+                <p>Where required, we'll provide reasonable notice. You remain responsible for fees and costs for work completed before our services end.</p>
+              </Sec>
 
-              <TermsSection id="professional-standards" icon={Shield} title="Our Professional Standards">
-                <p>
-                  We maintain the professional liability insurance required by the Law Society.
-                  If you have a concern about our service, please let us know so we have an
-                  opportunity to address it.
-                </p>
-                <div className="terms-info-box">
-                  <p>
-                    You can also contact the{' '}
-                    <strong>Law Society of Ontario</strong> if you have a professional
-                    conduct concern.
-                  </p>
+              <Sec id="professional" num="13" icon={Shield} title="Our Professional Standards" index={12}>
+                <p>We maintain the professional liability insurance required by the Law Society. If you have a concern, please let us know so we have an opportunity to address it.</p>
+                <div className="legal-note">
+                  <p>You can also contact the <strong>Law Society of Ontario</strong> if you have a professional conduct concern.</p>
                 </div>
-              </TermsSection>
+              </Sec>
 
-              <TermsSection id="limitation" icon={Scale} title="Limitation of Liability">
-                <p>
-                  To the extent permitted by law, we're not responsible for indirect or
-                  consequential losses or for issues caused by circumstances outside our
-                  reasonable control.
-                </p>
-                <p>
-                  Nothing in these terms is intended to limit any duty we owe you under the
-                  Paralegal Rules of Conduct or any rights you may have under applicable law.
-                </p>
-              </TermsSection>
+              <Sec id="limitation" num="14" icon={Scale} title="Limitation of Liability" index={13}>
+                <p>To the extent permitted by law, we're not responsible for indirect or consequential losses or for issues caused by circumstances outside our reasonable control.</p>
+                <p>Nothing in these terms limits any duty we owe you under the Paralegal Rules of Conduct or any rights you have under applicable law.</p>
+              </Sec>
 
-              <TermsSection id="governing-law" icon={FileText} title="Website Content &amp; Governing Law">
-                <p>
-                  The content on our website belongs to us unless stated otherwise and may not
-                  be copied, reproduced, or reused without our permission.
-                </p>
-                <p>
-                  These terms are governed by the laws of the{' '}
-                  <strong>Province of Ontario</strong> and the laws of Canada that apply there.
-                </p>
-              </TermsSection>
+              <Sec id="governing-law" num="15" icon={FileText} title="Website Content &amp; Governing Law" index={14}>
+                <p>The content on our website belongs to us unless stated otherwise and may not be copied, reproduced, or reused without permission.</p>
+                <p>These terms are governed by the laws of the <strong>Province of Ontario</strong> and the laws of Canada that apply there.</p>
+              </Sec>
 
-              <TermsSection id="changes" icon={FileText} title="Changes">
-                <p>
-                  We may update these terms from time to time. The date at the top of this
-                  page shows when the current version was last updated.
-                </p>
-              </TermsSection>
+              <Sec id="changes" num="16" icon={FileText} title="Changes" index={15}>
+                <p>We may update these terms from time to time. The date at the top of this page shows when the current version was last updated.</p>
+              </Sec>
 
-              <TermsSection id="contact" icon={Phone} title="Contact Us">
+              <Sec id="contact" num="17" icon={Phone} title="Contact Us" index={16}>
                 <p>If you have any questions about these terms, please reach out:</p>
-                <div className="terms-contact-grid">
-                  <a href="tel:+19054510300" className="terms-contact-item">
-                    <div className="terms-contact-icon">
-                      <Phone size={20} />
-                    </div>
+                <div className="legal-contact-grid">
+                  <a href="tel:+19054510300" className="legal-contact-card">
+                    <div className="legal-contact-card-icon"><Phone size={20} /></div>
                     <div>
-                      <span className="terms-contact-label">Phone</span>
-                      <span className="terms-contact-value">(905) 451-0300</span>
+                      <span className="legal-contact-card-label">Phone</span>
+                      <span className="legal-contact-card-value">(905) 451-0300</span>
                     </div>
                   </a>
-                  <a href="tel:+12268889800" className="terms-contact-item">
-                    <div className="terms-contact-icon">
-                      <Phone size={20} />
-                    </div>
+                  <a href="tel:+12268889800" className="legal-contact-card">
+                    <div className="legal-contact-card-icon"><Phone size={20} /></div>
                     <div>
-                      <span className="terms-contact-label">Alternate</span>
-                      <span className="terms-contact-value">(226) 888-9800</span>
+                      <span className="legal-contact-card-label">Alternate</span>
+                      <span className="legal-contact-card-value">(226) 888-9800</span>
                     </div>
                   </a>
-                  <a href="mailto:visho@anytimelegalservices.ca" className="terms-contact-item">
-                    <div className="terms-contact-icon">
-                      <Mail size={20} />
-                    </div>
+                  <a href="mailto:visho@anytimelegalservices.ca" className="legal-contact-card">
+                    <div className="legal-contact-card-icon"><Mail size={20} /></div>
                     <div>
-                      <span className="terms-contact-label">Email</span>
-                      <span className="terms-contact-value">visho@anytimelegalservices.ca</span>
+                      <span className="legal-contact-card-label">Email</span>
+                      <span className="legal-contact-card-value">visho@anytimelegalservices.ca</span>
                     </div>
                   </a>
                 </div>
-                <div className="terms-back-home">
+                <div className="legal-return-btn">
                   <Link to="/" className="btn btn-primary">
-                    <ArrowLeft size={16} />
-                    Return to Home
+                    <ArrowLeft size={15} /> Return to Home
                   </Link>
                 </div>
-              </TermsSection>
+              </Sec>
 
             </main>
           </div>
@@ -452,23 +333,22 @@ const TermsAndConditions = () => {
   )
 }
 
-const TermsSection = ({ id, icon: Icon, title, children }) => (
-  <motion.section
-    id={id}
-    className="terms-section"
-    initial={{ opacity: 0, y: 20 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: '-80px' }}
-    transition={{ duration: 0.5 }}
-  >
-    <div className="terms-section-header">
-      <div className="terms-section-icon">
-        <Icon size={20} />
+function Sec({ id, num, icon: Icon, title, index, children }) {
+  return (
+    <motion.section
+      id={id}
+      className="legal-section"
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.45, delay: 0.05 }}
+    >
+      <span className="legal-section-num" aria-hidden="true">{num}</span>
+      <div className="legal-section-head">
+        <div className="legal-section-icon-box"><Icon size={20} /></div>
+        <h2 className="legal-section-title" dangerouslySetInnerHTML={{ __html: title }} />
       </div>
-      <h2 className="terms-section-title" dangerouslySetInnerHTML={{ __html: title }} />
-    </div>
-    <div className="terms-section-body">{children}</div>
-  </motion.section>
-)
-
-export default TermsAndConditions
+      <div className="legal-section-body">{children}</div>
+    </motion.section>
+  )
+}
