@@ -347,7 +347,7 @@
 }
 
 .terms-list-cross li::before {
-  background: #e53e3e;
+  background: var(--secondary);
 }
 
 .terms-checklist {
@@ -421,19 +421,19 @@
 /* ===== Contact Grid ===== */
 .terms-contact-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
   margin: 1.5rem 0;
 }
 
 .terms-contact-item {
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 1.25rem;
+  gap: 1.25rem;
+  padding: 1.75rem 1.5rem;
   background: var(--background-alt);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-lg);
   transition: all var(--transition-base);
   text-decoration: none;
 }
@@ -448,8 +448,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 54px;
+  height: 54px;
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
   color: var(--secondary);
   border-radius: var(--radius-md);
@@ -458,17 +458,17 @@
 
 .terms-contact-label {
   display: block;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
   color: var(--text-muted);
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.3rem;
 }
 
 .terms-contact-value {
   display: block;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   color: var(--primary);
 }

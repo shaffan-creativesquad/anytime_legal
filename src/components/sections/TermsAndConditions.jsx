@@ -89,10 +89,6 @@ const TermsAndConditions = () => {
               <ArrowLeft size={18} />
               Back to Home
             </Link>
-            <div className="terms-hero-badge">
-              <Scale size={16} />
-              Legal Document
-            </div>
             <h1 className="terms-hero-title">
               Terms &amp; <span className="terms-hero-accent">Conditions</span>
             </h1>
