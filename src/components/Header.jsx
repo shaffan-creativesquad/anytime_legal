@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import './Header.css'
 
 const InstagramIcon = () => (
@@ -31,6 +32,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -67,6 +69,15 @@ const Header = () => {
   const scrollToSection = (sectionId) => {
     setIsMobileMenuOpen(false)
     document.body.style.overflow = 'unset'
+
+    if (window.location.pathname !== '/') {
+      navigate('/')
+      setTimeout(() => {
+        const element = document.getElementById(sectionId)
+        if (element) element.scrollIntoView({ behavior: 'smooth' })
+      }, 300)
+      return
+    }
 
     setTimeout(() => {
       const element = document.getElementById(sectionId)

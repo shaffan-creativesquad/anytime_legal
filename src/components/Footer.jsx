@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import {
   Phone,
   Mail,
@@ -170,6 +171,18 @@ const Footer = () => {
               </ul>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Bottom Bar */}
+      <div className="footer-bottom">
+        <div className="container footer-bottom-inner">
+          <p className="footer-copyright">
+            © {new Date().getFullYear()} Anytime Legal Services Professional Corporation. All rights reserved.
+          </p>
+          <Link to="/terms" className="footer-terms-link">
+            Terms &amp; Conditions
+          </Link>
         </div>
       </div>
     </footer>
