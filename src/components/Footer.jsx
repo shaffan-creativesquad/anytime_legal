@@ -181,11 +181,11 @@ const Footer = () => {
             © {new Date().getFullYear()} Anytime Legal Services Professional Corporation. All rights reserved.
           </p>
           <div className="footer-legal-links">
-            <Link to="/privacy" className="footer-terms-link">
+            <Link to="/privacy-policy" className="footer-terms-link">
               Privacy Policy
             </Link>
             <span className="footer-legal-divider">·</span>
-            <Link to="/terms" className="footer-terms-link">
+            <Link to="/terms-and-conditions" className="footer-terms-link">
               Terms &amp; Conditions
             </Link>
           </div>
