@@ -88,32 +88,31 @@ const Header = () => {
       {/* Main Header */}
       <header className={`header ${isScrolled ? 'header-scrolled' : ''}`}>
         <div className="container header-content">
-          <div className="header-left">
-            <div className="nav-social-links">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="nav-social-link"
-                >
-                  <social.icon />
-                </a>
-              ))}
-            </div>
-            <button onClick={() => scrollToSection('home')} className="logo">
-              <motion.img
-                src="/images/logo2.0.jpeg"
-                alt="Visho Legal"
-                className="logo-image"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              />
-              <span className="logo-name">Anytime Legal Services</span>
-            </button>
+          <div className="nav-social-links">
+            {socialLinks.map((social) => (
+              <a
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.label}
+                className="nav-social-link"
+              >
+                <social.icon />
+              </a>
+            ))}
           </div>
+
+          <button onClick={() => scrollToSection('home')} className="logo">
+            <motion.img
+              src="/images/logo2.0.jpeg"
+              alt="Visho Legal"
+              className="logo-image"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            />
+            <span className="logo-name">Anytime Legal Services</span>
+          </button>
 
           {/* Desktop Navigation */}
           <nav className="nav-desktop">

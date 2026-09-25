@@ -1,12 +1,13 @@
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  Scale,
   Gavel,
   Home,
   Car,
   CheckCircle,
-  ChevronDown
+  ChevronDown,
+  FileText,
+  Stamp
 } from 'lucide-react'
 import './Hero.css'
 
@@ -21,8 +22,8 @@ const Hero = () => {
   return (
     <section id="home" className="hero">
       <div className="hero-background">
-        <div className="hero-gradient"></div>
-        <div className="hero-pattern"></div>
+        <img src="/images/justice2.0.avif" alt="" className="hero-bg-image" />
+        <div className="hero-overlay"></div>
       </div>
       <div className="container hero-container">
         <motion.div
@@ -45,7 +46,7 @@ const Hero = () => {
               Free Consultation
               <ArrowRight size={18} />
             </button>
-            <button onClick={() => scrollToSection('services')} className="btn btn-secondary hero-btn-secondary">
+            <button onClick={() => scrollToSection('services')} className="btn hero-btn-secondary">
               Our Services
             </button>
           </div>
@@ -66,26 +67,25 @@ const Hero = () => {
         </motion.div>
         <motion.div
           className="hero-visual"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
         >
-          <div className="hero-card hero-card-main">
-            <Scale size={48} />
-            <h3>Your Partner in Justice</h3>
-            <p>Trusted legal support anytime, anywhere across Ontario</p>
-          </div>
           <div className="hero-card hero-card-floating hero-card-1">
-            <Gavel size={24} />
+            <Gavel size={22} />
             <span>Small Claims</span>
           </div>
           <div className="hero-card hero-card-floating hero-card-2">
-            <Home size={24} />
+            <Home size={22} />
             <span>Landlord & Tenant</span>
           </div>
           <div className="hero-card hero-card-floating hero-card-3">
-            <Car size={24} />
+            <Car size={22} />
             <span>Traffic Defence</span>
+          </div>
+          <div className="hero-card hero-card-floating hero-card-4">
+            <Stamp size={22} />
+            <span>Public Notary</span>
           </div>
         </motion.div>
       </div>

@@ -120,8 +120,8 @@ const Footer = () => {
                 {quickLinks.map((link) => (
                   <li key={link.id}>
                     <button onClick={() => scrollToSection(link.id)} className="footer-link">
-                      <ArrowRight size={14} />
                       {link.label}
+                      <ArrowRight size={14} />
                     </button>
                   </li>
                 ))}
@@ -135,8 +135,8 @@ const Footer = () => {
                 {services.map((service) => (
                   <li key={service}>
                     <button onClick={() => scrollToSection('services')} className="footer-link">
-                      <ArrowRight size={14} />
                       {service}
+                      <ArrowRight size={14} />
                     </button>
                   </li>
                 ))}

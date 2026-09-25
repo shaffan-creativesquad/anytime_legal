@@ -13,17 +13,22 @@
   z-index: -1;
 }
 
-.hero-gradient {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, #ffffff 0%, #f0f5fa 50%, #f7fafc 100%);
+.hero-bg-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
-.hero-pattern {
+.hero-overlay {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(circle at 1px 1px, rgba(26, 54, 93, 0.03) 1px, transparent 0);
-  background-size: 40px 40px;
+  background: linear-gradient(
+    105deg,
+    rgba(10, 25, 47, 0.82) 0%,
+    rgba(10, 25, 47, 0.72) 55%,
+    rgba(10, 25, 47, 0.45) 100%
+  );
 }
 
 .hero-container {
@@ -54,6 +59,7 @@
   font-size: clamp(2.5rem, 5vw, 3.75rem);
   line-height: 1.15;
   margin-bottom: 1.5rem;
+  color: #ffffff;
 }
 
 .hero-title-accent {
@@ -63,7 +69,7 @@
 
 .hero-description {
   font-size: 1.125rem;
-  color: var(--text-light);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 2rem;
   line-height: 1.8;
 }
@@ -76,13 +82,14 @@
 }
 
 .hero-btn-secondary {
-  border: 2px solid var(--primary);
+  border: 2px solid #ffffff;
   color: var(--primary);
+  background: #ffffff;
 }
 
 .hero-btn-secondary:hover {
-  background: var(--primary);
-  color: var(--white);
+  background: transparent;
+  color: #ffffff;
 }
 
 .hero-trust {
@@ -96,7 +103,7 @@
   align-items: center;
   gap: 0.5rem;
   font-size: 0.875rem;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .hero-trust-item svg {
@@ -105,76 +112,48 @@
 
 /* Hero Visual */
 .hero-visual {
-  position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   justify-content: center;
-  align-items: center;
-  min-height: 450px;
+  gap: 1rem;
 }
 
 .hero-card {
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: var(--radius-lg);
-  box-shadow: 0 20px 60px rgba(26, 54, 93, 0.12);
-}
-
-.hero-card-main {
-  padding: 3rem;
-  text-align: center;
-  max-width: 320px;
-}
-
-.hero-card-main svg {
-  color: var(--secondary);
-  margin-bottom: 1.5rem;
-}
-
-.hero-card-main h3 {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
-}
-
-.hero-card-main p {
-  font-size: 0.9375rem;
 }
 
 .hero-card-floating {
-  position: absolute;
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 1rem 1.25rem;
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--text);
+  padding: 0.875rem 1.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #ffffff;
   animation: float 4s ease-in-out infinite;
+  width: 100%;
+  max-width: 220px;
 }
 
 .hero-card-floating svg {
-  color: var(--primary);
+  color: var(--secondary);
+  flex-shrink: 0;
 }
 
-.hero-card-1 {
-  top: 0;
-  right: 0;
-  animation-delay: 0s;
-}
-
-.hero-card-2 {
-  bottom: 20%;
-  left: 0;
-  animation-delay: 1s;
-}
-
-.hero-card-3 {
-  bottom: 0;
-  right: 10%;
-  animation-delay: 2s;
-}
+.hero-card-1 { animation-delay: 0s; }
+.hero-card-2 { animation-delay: 0.6s; }
+.hero-card-3 { animation-delay: 1.2s; }
+.hero-card-4 { animation-delay: 1.8s; }
+.hero-card-5 { animation-delay: 2.4s; }
 
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50% { transform: translateY(-6px); }
 }
 
 .hero-scroll {
@@ -182,7 +161,7 @@
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.6);
   animation: bounce 2s infinite;
   background: none;
   border: none;
@@ -198,13 +177,25 @@
 /* ===== Responsive ===== */
 @media (max-width: 1024px) {
   .hero-container {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: center;
   }
 
-  .hero-content {
-    max-width: 100%;
+  .hero-visual {
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: auto;
+    padding: 4rem 0;
+  }
+
+  .hero-container {
+    grid-template-columns: 1fr;
+    text-align: center;
   }
 
   .hero-buttons {
@@ -213,32 +204,6 @@
 
   .hero-trust {
     justify-content: center;
-  }
-
-  .hero-visual {
-    min-height: 350px;
-  }
-
-  .hero-card-1 {
-    top: 10%;
-    right: 5%;
-  }
-
-  .hero-card-2 {
-    bottom: 25%;
-    left: 5%;
-  }
-
-  .hero-card-3 {
-    bottom: 5%;
-    right: 15%;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero {
-    min-height: auto;
-    padding: 4rem 0;
   }
 
   .hero-visual {

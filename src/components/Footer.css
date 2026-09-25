@@ -122,6 +122,7 @@
   background: none;
   border: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .footer-link:hover {
@@ -150,6 +151,7 @@
   gap: 1rem;
   color: rgba(255, 255, 255, 0.7);
   font-size: 0.9375rem;
+  white-space: nowrap;
 }
 
 .footer-contact li svg {

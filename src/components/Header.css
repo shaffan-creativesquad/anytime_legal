@@ -49,20 +49,13 @@
 
 .header-content {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  gap: 1.25rem;
   padding: 1rem var(--container-padding);
 }
 
 .header-scrolled .header-content {
   padding: 0.75rem var(--container-padding);
-}
-
-/* ===== Header Left ===== */
-.header-left {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
 }
 
 .nav-social-links {
@@ -121,6 +114,7 @@
 
 /* ===== Desktop Navigation ===== */
 .nav-desktop {
+  margin-left: auto;
   display: flex;
   align-items: center;
   gap: 2rem;
@@ -232,6 +226,10 @@
 
   .top-bar-contact span {
     display: none;
+  }
+
+  .mobile-menu-toggle {
+    margin-left: auto;
   }
 
   .nav-desktop {
