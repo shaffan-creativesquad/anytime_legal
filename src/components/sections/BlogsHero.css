@@ -1,0 +1,29 @@
+.BlogsHero-container
+{
+    background-image: url("/images/blog-hero-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+
+.BlogsHero-container .hero-title {
+  font-size: clamp(2.5rem, 5vw, 3.75rem);
+  line-height: 1.15;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+
+.BlogsHero-container .hero-title-accent {
+  display: inline;
+  color: var(--secondary);
+}
+
+.BlogsHero-container .hero-description {
+  font-size: 1.125rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+}
