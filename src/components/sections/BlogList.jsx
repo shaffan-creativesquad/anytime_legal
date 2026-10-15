@@ -18,7 +18,23 @@ const blogListAr = [
     date: 'September 29, 2026',
     image: '/images/posts/post-2.jpg',
     path: '/how-can-a-paralegal-help-with-landlord-and-tenant-issues-in-toronto'
-  }
+  },
+  {
+  id: 3,
+  title: 'What Does a Licensed Paralegal Do for Landlord and Tenant Disputes?',
+  excerpt: 'Learn what a landlord and tenant paralegal handles, when you need one, and how to find licensed paralegal services near you in Ontario.',
+  date: 'October 15, 2026',
+  image: '/images/posts/post-3.png',
+  path: '/what-does-a-licensed-paralegal-do-for-landlord-and-tenant-disputes'
+},
+{
+  id: 4,
+  title: "What's the Process for Disputing a Traffic Ticket in Ontario?",
+  excerpt: "Learn how to fight a traffic ticket in Ontario, when to hire a traffic ticket paralegal, and where to find public notary services for related paperwork.",
+  date: "October 20, 2026",
+  image: "/images/posts/post-4.png",
+  path: "/whats-the-process-for-disputing-a-traffic-ticket-in-ontario"
+}
 ];
 
 const BlogList = () => {

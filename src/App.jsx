@@ -12,6 +12,8 @@ import PrivacyPolicy from './components/sections/PrivacyPolicy'
 import Blogs from './components/pages/Blogs'
 import FirstPost from './components/pages/posts/FirstPost'
 import SecondPost from './components/pages/posts/SecondPost'
+import ThirdPost from './components/pages/posts/ThirdPost'
+import FourthPost from './components/pages/posts/FourthPost'
 
 const HomePage = () => (
   <main>
@@ -37,6 +39,8 @@ function App() {
           <Route path="/blogs" element={<Blogs />} />
           <Route path="/when-should-you-hire-a-paralegal-for-a-landlord-and-tenant-dispute-in-ontario" element={<FirstPost />} />
           <Route path="/how-can-a-paralegal-help-with-landlord-and-tenant-issues-in-toronto" element={<SecondPost />} />
+          <Route path="/what-does-a-licensed-paralegal-do-for-landlord-and-tenant-disputes" element={<ThirdPost />} />
+          <Route path="/whats-the-process-for-disputing-a-traffic-ticket-in-ontario" element={<FourthPost />} />
         </Routes>
         <Footer />
       </div>
