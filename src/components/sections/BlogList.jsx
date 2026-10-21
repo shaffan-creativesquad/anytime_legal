@@ -34,6 +34,22 @@ const blogListAr = [
   date: "October 20, 2026",
   image: "/images/posts/post-4.png",
   path: "/whats-the-process-for-disputing-a-traffic-ticket-in-ontario"
+},
+{
+  id: 5,
+  title: "Small Claims Court Paralegal & Traffic Ticket Paralegal: When Do You Need Representation?",
+  excerpt: "You may need legal representation when a Small Claims Court dispute becomes difficult to manage alone. A licensed paralegal can provide advice and representation for eligible matters.",
+  date: "October 21, 2026",
+  image: "/images/posts/post-5.jpeg",
+  path: "/small-claims-court-paralegal-and-traffic-ticket-paralegal-when-do-you-need-representation"
+},
+{
+  id: 6,
+  title: "Need Public Notary Services or an Affordable Paralegal in Toronto?",
+  excerpt: "You can get help from a public notary for your document needs or from a licensed paralegal for certain legal matters. In Ontario, notaries can certify true copies, witness document signings, and handle affidavits.",
+  date: "October 21, 2026",
+  image: "/images/posts/post-6.jpeg",
+  path: "/need-public-notary-services-or-an-affordable-paralegal-in-toronto"
 }
 ];
 
