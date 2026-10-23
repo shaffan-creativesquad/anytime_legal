@@ -14,6 +14,7 @@ import FirstPost from './components/pages/posts/FirstPost'
 import SecondPost from './components/pages/posts/SecondPost'
 import ThirdPost from './components/pages/posts/ThirdPost'
 import FourthPost from './components/pages/posts/FourthPost'
+import LandlordTenantDisputes from './components/pages/LandlordTenantDisputes'
 
 const HomePage = () => (
   <main>
@@ -41,6 +42,8 @@ function App() {
           <Route path="/how-can-a-paralegal-help-with-landlord-and-tenant-issues-in-toronto" element={<SecondPost />} />
           <Route path="/what-does-a-licensed-paralegal-do-for-landlord-and-tenant-disputes" element={<ThirdPost />} />
           <Route path="/whats-the-process-for-disputing-a-traffic-ticket-in-ontario" element={<FourthPost />} />
+
+          <Route path="/landlord-tenant-dispute" element={<LandlordTenantDisputes />} />
         </Routes>
         <Footer />
       </div>
