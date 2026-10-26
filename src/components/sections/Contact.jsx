@@ -119,6 +119,16 @@ const Contact = () => {
 
       if (response.ok) {
         setSubmitStatus('success')
+
+        // Fire Google Ads Submit Lead Form conversion
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'conversion', {
+            'send_to': 'AW-16685331260/GS4dCJnLkKcdELzml5Q-',
+            'value': 1.0,
+            'currency': 'CAD'
+          });
+        }
+
         setFormData({
           name: '',
           email: '',
