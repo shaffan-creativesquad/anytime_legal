@@ -50,6 +50,30 @@ const blogListAr = [
   date: "October 21, 2026",
   image: "/images/posts/post-6.jpeg",
   path: "/need-public-notary-services-or-an-affordable-paralegal-in-toronto"
+},
+{
+  id: 7,
+  title: "What Can a Paralegal Handle for You in Toronto and Brampton?",
+  excerpt: "A licensed paralegal Toronto residents hire can handle traffic tickets, Landlord and Tenant Board disputes, and eligible Small Claims Court cases. Ontario paralegals are regulated by the Law Society of Ontario.",
+  date: "November 25, 2026",
+  image: "/images/posts/post-7.jpeg",
+  path: "/what-can-a-paralegal-handle-for-you-in-toronto-and-brampton"
+},
+{
+  id: 10,
+  title: "Do You Need a Notary, a Paralegal, or Both?",
+  excerpt: "You need a notary public when a document must be certified, witnessed, or sworn. You need a paralegal when you face a dispute, a hearing, or a court claim. Many licensed paralegals in Ontario are also appointed notaries.",
+  date: "November 25, 2026",
+  image: "/images/posts/post-10.jpeg",
+  path: "/do-you-need-a-notary-a-paralegal-or-both"
+},
+{
+  id: 11,
+  title: "What Should You Expect From a Free Paralegal Consultation?",
+  excerpt: "A free consultation lets you explain your problem, learn your options, and understand costs before you commit. You leave knowing whether a paralegal can handle your matter and what happens next.",
+  date: "November 25, 2026",
+  image: "/images/posts/post-11.jpeg",
+  path: "/what-should-you-expect-from-a-free-paralegal-consultation"
 }
 ];
 
