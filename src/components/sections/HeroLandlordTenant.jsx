@@ -24,7 +24,7 @@ const HeroLandlordTenant = () => {
     <section id="home" className="hero">
       <div className="hero-background">
         <img
-          src="/images/landlord-tenant-bg.jpg"
+          src="/images/justice2.0.avif"
           alt="Landlord and Tenant Legal Services"
           className="hero-bg-image"
         />
@@ -38,21 +38,15 @@ const HeroLandlordTenant = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="hero-badge">Landlord & Tenant Disputes</div>
+          <div className="hero-badge">Lorem Ipsum</div>
 
           <h1 className="hero-title">
-            Trusted Landlord and Tenant Paralegal
-            <span className="hero-title-accent"> For Fair, Firm Representation</span>
+           Lorem
+            <span className="hero-title-accent" style={{display:"inline"}}> Ipsum</span>
           </h1>
 
           <p className="hero-description">
-            Whether you're a landlord chasing unpaid rent or a tenant facing an
-            eviction you don't think is fair, a housing dispute can quickly take
-            over your life. As a licensed landlord-tenant paralegal serving all
-            of Ontario, we explain your rights in plain language, prepare the
-            right forms, and stand beside you at your Landlord and Tenant Board
-            hearing. Our landlord and tenant legal services are built to give you
-            clarity, confidence, and a strong case from day one.
+         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
           </p>
 
           <div className="hero-buttons">
@@ -63,16 +57,16 @@ const HeroLandlordTenant = () => {
               Book a Free Consultation
               <ArrowRight size={18} />
             </button>
-            <button
+            {/* <button
               onClick={() => scrollToSection('ltb-info')}
               className="btn hero-btn-secondary"
             >
               Talk to an LTB Paralegal
               <MessageSquare size={18} />
-            </button>
+            </button> */}
           </div>
 
-          <div className="hero-trust">
+          {/* <div className="hero-trust">
             <div className="hero-trust-item">
               <CheckCircle size={18} />
               <span>Licensed LTB Paralegal</span>
@@ -85,10 +79,10 @@ const HeroLandlordTenant = () => {
               <CheckCircle size={18} />
               <span>Flexible Appointments</span>
             </div>
-          </div>
+          </div> */}
         </motion.div>
 
-        <motion.div
+        {/* <motion.div
           className="hero-visual"
           initial={{ opacity: 0, x: 40 }}
           animate={{ opacity: 1, x: 0 }}
@@ -110,7 +104,7 @@ const HeroLandlordTenant = () => {
             <ShieldCheck size={22} />
             <span>Rent Recovery</span>
           </div>
-        </motion.div>
+        </motion.div> */}
       </div>
 
       <button

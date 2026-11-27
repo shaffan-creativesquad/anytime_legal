@@ -14,12 +14,9 @@ import FirstPost from './components/pages/posts/FirstPost'
 import SecondPost from './components/pages/posts/SecondPost'
 import ThirdPost from './components/pages/posts/ThirdPost'
 import FourthPost from './components/pages/posts/FourthPost'
-<<<<<<< HEAD
 import LandlordTenantDisputes from './components/pages/LandlordTenantDisputes'
-=======
 import FifthPost from './components/pages/posts/FifthPost'
 import SixthPost from './components/pages/posts/SixthPost'
->>>>>>> 09dc056b8531f24c7a7c6545063f77d439fad4b6
 
 const HomePage = () => (
   <main>
@@ -49,6 +46,8 @@ function App() {
           <Route path="/whats-the-process-for-disputing-a-traffic-ticket-in-ontario" element={<FourthPost />} />
           <Route path="/small-claims-court-paralegal-and-traffic-ticket-paralegal-when-do-you-need-representation" element={<FifthPost />} />
           <Route path="/need-public-notary-services-or-an-affordable-paralegal-in-toronto" element={<SixthPost />} />
+
+          <Route path="/service-inner" element={<LandlordTenantDisputes />} />
         </Routes>
         <Footer />
       </div>

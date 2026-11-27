@@ -46,8 +46,11 @@ const Hero = () => {
               Free Consultation
               <ArrowRight size={18} />
             </button>
-            <button onClick={() => scrollToSection('services')} className="btn hero-btn-secondary">
+            {/* <button onClick={() => scrollToSection('services')} className="btn hero-btn-secondary">
               Our Services
+            </button> */}
+            <button onClick={() => window.open('tel:+19054510300')} className="btn hero-btn-secondary">
+             (905) 451-0300
             </button>
           </div>
           <div className="hero-trust">
