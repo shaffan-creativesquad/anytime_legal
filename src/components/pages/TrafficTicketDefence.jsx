@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import HeroTrafficTicket from "../sections/HeroTrafficTicket";
 import ImgByText from "../sections/ImgByText";
 import Contact from '../sections/Contact'
@@ -8,6 +9,10 @@ import TrafficTicketFAQ from '../sections/TrafficTicketFAQ'
 function TrafficTicketDefence() {
   return (
     <div>
+      <Helmet>
+        <title>Traffic Ticket Defence Ontario | Speeding & Careless Driving</title>
+        <meta name="description" content="Fight speeding, careless driving and HTA tickets in Ontario with experienced defence. Protect your driving record and reduce penalties. Call for help today." />
+      </Helmet>
       <HeroTrafficTicket />
 
       <ImgByText

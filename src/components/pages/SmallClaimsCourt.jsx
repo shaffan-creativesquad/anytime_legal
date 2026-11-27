@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import HeroSmallClaims from "../sections/HeroSmallClaims";
 import ImgByText from "../sections/ImgByText";
 import Contact from '../sections/Contact'
@@ -8,6 +9,10 @@ import SmallClaimsFAQ from '../sections/SmallClaimsFAQ'
 function SmallClaimsCourt() {
   return (
     <div>
+      <Helmet>
+        <title>Small Claims Court Ontario | Debt & Contract Disputes</title>
+        <meta name="description" content="Representation in Ontario Small Claims Court for civil claims up to $50,000: debt collection, contract disputes and property damage claims. Get help today." />
+      </Helmet>
       <HeroSmallClaims />
 
       <ImgByText

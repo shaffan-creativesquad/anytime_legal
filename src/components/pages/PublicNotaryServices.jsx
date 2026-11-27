@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import HeroPublicNotary from "../sections/HeroPublicNotary";
 import ImgByText from "../sections/ImgByText";
 import Contact from '../sections/Contact'
@@ -8,6 +9,10 @@ import PublicNotaryFAQ from '../sections/PublicNotaryFAQ'
 function PublicNotaryServices() {
   return (
     <div>
+      <Helmet>
+        <title>Public Notary Ontario | Affidavits, Declarations & Copies</title>
+        <meta name="description" content="Certified public notary services in Ontario: document authentication, affidavits, statutory declarations, certified copies and legal certifications." />
+      </Helmet>
       <HeroPublicNotary />
 
       <ImgByText

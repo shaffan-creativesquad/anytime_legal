@@ -1,4 +1,5 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
 import HeroLandlordTenant from "../sections/HeroLandlordTenant";
 import ImgByText from "../sections/ImgByText";
 import Contact from '../sections/Contact'
@@ -8,6 +9,10 @@ import ServiceFAQ from '../sections/ServiceFAQ'
 function LandlordTenantDisputes() {
   return (
     <div>
+      <Helmet>
+        <title>LTB Hearings & Eviction Help | Landlord Tenant Ontario</title>
+        <meta name="description" content="Ontario landlord and tenant representation for evictions, lease violations, maintenance issues and Landlord and Tenant Board hearings. Book a consult." />
+      </Helmet>
       <HeroLandlordTenant />
 
       <ImgByText
