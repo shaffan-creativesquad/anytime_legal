@@ -100,7 +100,7 @@ const Header = () => {
     {
       id: 'services', label: 'Services',
       dropdown: [
-        { label: 'Landlord & Tenant Disputes', path: '/service-inner' },
+        { label: 'Landlord & Tenant Disputes', path: '/landlord-tenant-disputes' },
         { label: 'Small Claims Court', path: '/small-claims-court' },
         { label: 'Traffic Ticket Defence', path: '/traffic-ticket-defence' },
         { label: 'Public Notary Services', path: '/public-notary-services' },

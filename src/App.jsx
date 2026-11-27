@@ -56,7 +56,7 @@ function App() {
           <Route path="/do-you-need-a-notary-a-paralegal-or-both" element={<TenthPost />} />
           <Route path="/what-should-you-expect-from-a-free-paralegal-consultation" element={<EleventhPost />} />
 
-          <Route path="/service-inner" element={<LandlordTenantDisputes />} />
+          <Route path="/landlord-tenant-disputes" element={<LandlordTenantDisputes />} />
           <Route path="/small-claims-court" element={<SmallClaimsCourt />} />
           <Route path="/traffic-ticket-defence" element={<TrafficTicketDefence />} />
           <Route path="/public-notary-services" element={<PublicNotaryServices />} />
