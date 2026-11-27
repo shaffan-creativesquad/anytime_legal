@@ -1,4 +1,5 @@
 ﻿import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
+import { Helmet } from 'react-helmet'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Hero from './components/sections/Hero'
@@ -24,6 +25,17 @@ import SeventhPost from './components/pages/posts/SeventhPost'
 import TenthPost from './components/pages/posts/TenthPost'
 import EleventhPost from './components/pages/posts/EleventhPost'
 
+const BASE_URL = 'https://anytimelegalservices.ca'
+
+const CanonicalTag = () => {
+  const { pathname } = useLocation()
+  return (
+    <Helmet>
+      <link rel="canonical" href={`${BASE_URL}${pathname}`} />
+    </Helmet>
+  )
+}
+
 const HomePage = () => (
   <main>
     <Hero />
@@ -39,6 +51,7 @@ function App() {
   return (
     <BrowserRouter>
       <div className="app">
+        <CanonicalTag />
         <Header />
         <Routes>
           <Route path="/" element={<HomePage />} />
