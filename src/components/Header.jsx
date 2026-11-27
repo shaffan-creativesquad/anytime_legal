@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { Menu, X, ChevronDown } from 'lucide-react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import './Header.css'
 
 const InstagramIcon = () => (
@@ -32,13 +32,21 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const [openDropdown, setOpenDropdown] = useState(null)
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false)
   const navigate = useNavigate()
+  const location = useLocation()
+  const isHomePage = location.pathname === '/'
 
   useEffect(() => {
+    if (!isHomePage) {
+      setActiveSection('')
+      return
+    }
+
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
 
-      // Update active section based on scroll position
       const sections = ['home', 'services', 'about', 'contact']
       const scrollPosition = window.scrollY + 100
 
@@ -56,7 +64,7 @@ const Header = () => {
 
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
+  }, [isHomePage])
 
   useEffect(() => {
     if (isMobileMenuOpen) {
@@ -89,9 +97,17 @@ const Header = () => {
 
   const navLinks = [
     { id: 'home', label: 'Home' },
-    { id: 'services', label: 'Services' },
+    {
+      id: 'services', label: 'Services',
+      dropdown: [
+        { label: 'Landlord & Tenant Disputes', path: '/service-inner' },
+        { label: 'Small Claims Court', path: '/small-claims-court' },
+        { label: 'Traffic Ticket Defence', path: '/traffic-ticket-defence' },
+        { label: 'Public Notary Services', path: '/public-notary-services' },
+      ]
+    },
     { id: 'about', label: 'About' },
-    { id: 'blogs', label: 'Blogs',externalPage: true },
+    { id: 'blogs', label: 'Blogs', externalPage: true },
     { id: 'contact', label: 'Contact' },
   ]
 
@@ -129,20 +145,53 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="nav-desktop">
             {navLinks.map((link) => (
-              <button
+              <div
                 key={link.id}
-                onClick={() =>{if(link?.externalPage == true){navigate("/blogs")} else{scrollToSection(link.id)}}}
-                className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                className="nav-item"
+                onMouseEnter={() => link.dropdown && setOpenDropdown(link.id)}
+                onMouseLeave={() => setOpenDropdown(null)}
               >
-                {link.label}
-                {activeSection === link.id && (
-                  <motion.div
-                    className="nav-underline"
-                    layoutId="underline"
-                    transition={{ duration: 0.3 }}
-                  />
+                <button
+                  onClick={() => {
+                    if (link?.externalPage) navigate('/blogs')
+                    else if (!link.dropdown) scrollToSection(link.id)
+                  }}
+                  className={`nav-link ${activeSection === link.id ? 'active' : ''}`}
+                >
+                  {link.label}
+                  {link.dropdown && <ChevronDown size={14} className={`dropdown-chevron ${openDropdown === link.id ? 'open' : ''}`} />}
+                  {activeSection === link.id && (
+                    <motion.div
+                      className="nav-underline"
+                      layoutId="underline"
+                      transition={{ duration: 0.3 }}
+                    />
+                  )}
+                </button>
+                {link.dropdown && (
+                  <AnimatePresence>
+                    {openDropdown === link.id && (
+                      <motion.div
+                        className="nav-dropdown"
+                        initial={{ opacity: 0, y: -6 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -6 }}
+                        transition={{ duration: 0.18 }}
+                      >
+                        {link.dropdown.map((item) => (
+                          <button
+                            key={item.path}
+                            className="nav-dropdown-item"
+                            onClick={() => { navigate(item.path); setOpenDropdown(null) }}
+                          >
+                            {item.label}
+                          </button>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 )}
-              </button>
+              </div>
             ))}
             <button onClick={() => scrollToSection('contact')} className="btn btn-primary nav-cta">
               Free Consultation
@@ -178,11 +227,29 @@ const Header = () => {
                     transition={{ delay: index * 0.1 }}
                   >
                     <button
-                      onClick={() => scrollToSection(link.id)}
+                      onClick={() => {
+                        if (link.dropdown) setMobileServicesOpen(o => !o)
+                        else if (link.externalPage) { setIsMobileMenuOpen(false); navigate('/blogs') }
+                        else scrollToSection(link.id)
+                      }}
                       className={`nav-mobile-link ${activeSection === link.id ? 'active' : ''}`}
                     >
                       {link.label}
+                      {link.dropdown && <ChevronDown size={14} className={`dropdown-chevron ${mobileServicesOpen ? 'open' : ''}`} />}
                     </button>
+                    {link.dropdown && mobileServicesOpen && (
+                      <div className="nav-mobile-dropdown">
+                        {link.dropdown.map((item) => (
+                          <button
+                            key={item.path}
+                            className="nav-mobile-dropdown-item"
+                            onClick={() => { setIsMobileMenuOpen(false); navigate(item.path) }}
+                          >
+                            {item.label}
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </motion.div>
                 ))}
                 <motion.div

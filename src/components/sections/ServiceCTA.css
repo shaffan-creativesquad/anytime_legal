@@ -1,0 +1,21 @@
+.service-cta {
+  background: var(--primary);
+}
+
+.service-cta-inner {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.service-cta-inner h2 {
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.service-cta-inner p {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}

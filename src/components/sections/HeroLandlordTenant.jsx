@@ -38,15 +38,15 @@ const HeroLandlordTenant = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="hero-badge">Lorem Ipsum</div>
+          <div className="hero-badge">Landlord &amp; Tenant Disputes</div>
 
           <h1 className="hero-title">
-           Lorem
-            <span className="hero-title-accent" style={{display:"inline"}}> Ipsum</span>
+            Your Landlord and Tenant Paralegal
+            <span className="hero-title-accent" style={{display:"block"}}> at the LTB</span>
           </h1>
 
           <p className="hero-description">
-         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            Rent arrears, an eviction notice you didn't see coming, a unit that never gets repaired: tenancy disputes escalate fast. As your landlord and tenant paralegal, we prepare notices and applications correctly, build the evidence, and represent you before the Landlord and Tenant Board across Ontario.
           </p>
 
           <div className="hero-buttons">
