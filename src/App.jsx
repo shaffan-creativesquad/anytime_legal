@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+﻿import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import Hero from './components/sections/Hero'
@@ -17,6 +17,12 @@ import FourthPost from './components/pages/posts/FourthPost'
 import LandlordTenantDisputes from './components/pages/LandlordTenantDisputes'
 import FifthPost from './components/pages/posts/FifthPost'
 import SixthPost from './components/pages/posts/SixthPost'
+<<<<<<< HEAD
+=======
+import SeventhPost from './components/pages/posts/SeventhPost'
+import TenthPost from './components/pages/posts/TenthPost'
+import EleventhPost from './components/pages/posts/EleventhPost'
+>>>>>>> fb9ece81b754cba0df2f2bf4452b39390242d129
 
 const HomePage = () => (
   <main>
@@ -46,8 +52,14 @@ function App() {
           <Route path="/whats-the-process-for-disputing-a-traffic-ticket-in-ontario" element={<FourthPost />} />
           <Route path="/small-claims-court-paralegal-and-traffic-ticket-paralegal-when-do-you-need-representation" element={<FifthPost />} />
           <Route path="/need-public-notary-services-or-an-affordable-paralegal-in-toronto" element={<SixthPost />} />
+<<<<<<< HEAD
 
           <Route path="/service-inner" element={<LandlordTenantDisputes />} />
+=======
+          <Route path="/what-can-a-paralegal-handle-for-you-in-toronto-and-brampton" element={<SeventhPost />} />
+          <Route path="/do-you-need-a-notary-a-paralegal-or-both" element={<TenthPost />} />
+          <Route path="/what-should-you-expect-from-a-free-paralegal-consultation" element={<EleventhPost />} />
+>>>>>>> fb9ece81b754cba0df2f2bf4452b39390242d129
         </Routes>
         <Footer />
       </div>
