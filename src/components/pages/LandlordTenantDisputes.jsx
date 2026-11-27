@@ -29,7 +29,7 @@ function LandlordTenantDisputes() {
         sideImg="/images/justice2.0.avif"
         subHeading="For Tenants"
         heading="Stand Your Ground When Your Home Is at Risk"
-        para="A notice is not an eviction. Only a Board order (enforced by the Court Enforcement Office (Sheriff)) will remove you. As the landlord tenant paralegal in Ontario, we will challenge defective notices, file the T2 and T6 applications, and pursue bad-faith eviction claims."
+        para="A notice is not an eviction. Only a Board order (enforced by the Court Enforcement Office (Sheriff) will remove you. As the landlord tenant paralegal in Ontario, we will challenge defective notices, file the T2 and T6 applications, and pursue bad-faith eviction claims."
         bulletList={[
           "T2 tenant rights and harassment claims",
           "T6 maintenance and repair applications",
